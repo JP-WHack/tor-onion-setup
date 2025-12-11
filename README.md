@@ -61,7 +61,7 @@ sudo bash onion.sh
 
 ```bash
 # スクリプトをダウンロード
-wget https://[リポジトリURL]/onion.sh
+wget URL
 
 # 実行権限を付与
 chmod +x onion.sh
@@ -268,7 +268,7 @@ sudo bash onion.sh
 
 **Bitcoin (BTC):**
 ```
-[ここにBTCアドレスを記載]
+151feG2x2pUqG97p9kSKL7E3LgpukNWozT
 ```
 
 すべての寄付は、プライバシーとセキュリティ研究のための無料教育リソースの維持を支援します。

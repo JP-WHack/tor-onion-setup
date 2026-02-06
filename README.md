@@ -268,7 +268,7 @@ sudo bash onion.sh
 
 **Bitcoin (BTC):**
 ```
-151feG2x2pUqG97p9kSKL7E3LgpukNWozT
+bc1q2tf2d7ts89amthax70mf64p9ez7c9xz56snku0
 ```
 
 すべての寄付は、プライバシーとセキュリティ研究のための無料教育リソースの維持を支援します。

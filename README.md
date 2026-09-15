@@ -1,42 +1,46 @@
+<div align="center">
+
 # Tor Hidden Service 自動セットアップ
 
-**教育目的の.onionサイト構築ツール - ワンコマンドで展開可能**
+**教育目的の .onion サイト構築ツール - ワンコマンドで展開可能**
 
-![Bash](https://img.shields.io/badge/bash-自動化-green.svg)
-![Platform](https://img.shields.io/badge/platform-Raspberry%20Pi%20%7C%20Debian-red.svg)
-![License](https://img.shields.io/badge/license-Educational-orange.svg)
+![Bash](https://img.shields.io/badge/Bash-自動化-4EAA25?style=for-the-badge&logo=gnubash&logoColor=white)
+![Platform](https://img.shields.io/badge/Platform-Raspberry_Pi_%7C_Debian-A22846?style=for-the-badge&logo=raspberrypi&logoColor=white)
+![License](https://img.shields.io/badge/License-Educational-FF8C00?style=for-the-badge)
 
----
-
-## 概要
-
-Debianベースシステム上でTor Hidden Service（.onionサイト）を自動展開するスクリプトです。Tor、Nginx、および関連コンポーネントの設定を効率化し、教育目的およびプライバシー研究のための匿名Webサービスの迅速な展開を可能にします。
+</div>
 
 ---
 
-## 機能
+## 📖 概要
+
+Debian ベースシステム上で Tor Hidden Service（.onion サイト）を自動展開するスクリプトです。Tor、Nginx、および関連コンポーネントの設定を効率化し、教育目的およびプライバシー研究のための匿名 Web サービスの迅速な展開を可能にします。
+
+---
+
+## ✨ 主な機能
 
 * 完全自動セットアッププロセス
-* .onionアドレスの自動生成
-* Webサーバー（Nginx）の事前設定
-* Tor v3プロトコル対応
+* .onion アドレスの自動生成
+* Web サーバー（Nginx）の事前設定
+* Tor v3 プロトコル対応
 * 冪等性のある実行（安全に再実行可能）
 * 包括的なエラーハンドリング
 * サービス自動起動設定
 
 ---
 
-## システム要件
+## 📋 システム要件
 
-* Debian 11または12（Raspberry Pi OS対応）
-* rootまたはsudo権限
+* Debian 11 または 12（Raspberry Pi OS 対応）
+* root または sudo 権限
 * インターネット接続
-* 最低512MBのRAM
-* 1GBの空きディスク容量
+* 最低 512MB の RAM
+* 1GB の空きディスク容量
 
 ---
 
-## クイックスタート
+## 🚀 クイックスタート
 
 セットアップスクリプトを実行:
 
@@ -45,17 +49,18 @@ sudo bash onion.sh
 ```
 
 スクリプトは以下を自動的に実行します:
+
 1. 必要なパッケージのインストール（Tor、Nginx）
-2. Tor Hidden Serviceの設定
-3. Webサーバーのセットアップ
-4. .onionアドレスの生成
+2. Tor Hidden Service の設定
+3. Web サーバーのセットアップ
+4. .onion アドレスの生成
 5. 全サービスの起動
 
-セットアップは通常1〜2分で完了します。
+セットアップは通常 1〜2 分で完了します。
 
 ---
 
-## 導入手順
+## 💻 使用方法
 
 ### 初期セットアップ
 
@@ -66,32 +71,56 @@ wget URL
 # 実行権限を付与
 chmod +x onion.sh
 
-# root権限で実行
+# root 権限で実行
 sudo bash onion.sh
 ```
 
 ### サービスへのアクセス
 
-完了すると、固有の.onionアドレスが表示されます:
+完了すると、固有の .onion アドレスが表示されます:
 
 ```
-あなたの.onionアドレス:
+あなたの .onion アドレス:
 ----------------------------------------
   abc123xyz456def789.onion
 ----------------------------------------
 ```
 
-Tor Browserを使用してアクセス:
-1. Tor Browserをダウンロード: https://www.torproject.org/download/
-2. Tor Browserを起動
-3. .onionアドレスを入力
-4. Hidden Serviceにアクセス
+Tor Browser を使用してアクセス:
+
+1. Tor Browser をダウンロード: https://www.torproject.org/download/
+2. Tor Browser を起動
+3. .onion アドレスを入力
+4. Hidden Service にアクセス
 
 ---
 
-## サービス管理
+## 🏗️ 技術アーキテクチャ
 
-### .onionアドレスの確認
+```
+クライアント (Tor Browser)
+        |
+        v
+    Tor ネットワーク
+        |
+        v
+あなたの Hidden Service (.onion)
+        |
+        v
+    Tor (ポー〈80 -> 127.0.0.1:8080)
+        |
+        v
+    Nginx (127.0.0.1:8080)
+        |
+        v
+    Web コンテンツ (/var/www/onion)
+```
+
+---
+
+## 🔧 サービス管理
+
+### .onion アドレスの確認
 
 ```bash
 sudo cat /var/lib/tor/hidden_service/hostname
@@ -112,27 +141,27 @@ systemctl status tor@default nginx
 ### ログの確認
 
 ```bash
-# Torログ
+# Tor ログ
 journalctl -u tor@default -f
 
-# Nginxログ
+# Nginx ログ
 tail -f /var/log/nginx/onion_error.log
 tail -f /var/log/nginx/onion_access.log
 ```
 
 ---
 
-## カスタマイズ
+## ⚙️ カスタマイズ
 
-### Webコンテンツの変更
+### Web コンテンツの変更
 
-HTMLファイルを編集:
+HTML ファイルを編集:
 
 ```bash
 sudo nano /var/www/onion/index.html
 ```
 
-変更後、Nginxをリロード:
+変更後、Nginx をリロード:
 
 ```bash
 sudo systemctl reload nginx
@@ -140,13 +169,13 @@ sudo systemctl reload nginx
 
 ### ポート設定の変更
 
-Tor設定を編集:
+Tor 設定を編集:
 
 ```bash
 sudo nano /etc/tor/torrc
 ```
 
-HiddenServicePort指示を変更して再起動:
+HiddenServicePort 指示を変更して再起動:
 
 ```bash
 sudo systemctl restart tor@default
@@ -154,11 +183,11 @@ sudo systemctl restart tor@default
 
 ---
 
-## トラブルシューティング
+## 🔍 トラブルシューティング
 
 ### アドレスが生成されない
 
-Torサービスのステータスとログを確認:
+Tor サービスのステータスとログを確認:
 
 ```bash
 systemctl status tor@default
@@ -195,66 +224,45 @@ sudo bash onion.sh
 
 ---
 
-## 技術アーキテクチャ
-
-```
-クライアント (Tor Browser)
-        |
-        v
-    Torネットワーク
-        |
-        v
-あなたのHidden Service (.onion)
-        |
-        v
-    Tor (ポート80 -> 127.0.0.1:8080)
-        |
-        v
-    Nginx (127.0.0.1:8080)
-        |
-        v
-    Webコンテンツ (/var/www/onion)
-```
-
----
-
-## 教育への応用
+## 🎓 教育への応用
 
 このツールは以下の学習を促進します:
 
-* Torネットワークアーキテクチャとプロトコル
-* Hidden Serviceの展開と運用
+* Tor ネットワークアーキテクチャとプロトコル
+* Hidden Service の展開と運用
 * 匿名通信システム
 * プライバシー保護技術
-* Webサーバー設定
-* Linuxシステム管理
+* Web サーバー設定
+* Linux システム管理
 
 ---
 
-## 許可された使用範囲
+## ✅ 許可された使用範囲
 
 本ソフトウェアは以下の目的でのみ使用可能です:
 
 **許可される用途:**
+
 * 教育研究と学習
 * プライバシー技術の学習
 * 管理された環境での個人実験
 * 学術的課題とプロジェクト
 
 **禁止される用途:**
+
 * あらゆる種類の違法行為
 * 違法コンテンツのホスティング
 * 利用規約の違反
 * 嫌がらせや他者への危害
 * 著作権侵害
 
-ユーザーは、使用が適用されるすべての法律および規制に準拠していることを確保する全責任を負います。Torネットワークの匿名性機能は、ユーザーを法的責任から免除するものではありません。
+ユーザーは、使用が適用されるすべての法律および規制に準拠していることを確保する全責任を負います。Tor ネットワークの匿名性機能は、ユーザーを法的責任から免除するものではありません。
 
 ---
 
-## セキュリティに関する考慮事項
+## 🔒 セキュリティに関する考慮事項
 
-* Hidden Serviceは匿名性を提供しますが、絶対的なセキュリティではありません
+* Hidden Service は匿名性を提供しますが、絶対的なセキュリティではありません
 * サーバーインフラストラクチャは適切に保護する必要があります
 * 定期的なセキュリティアップデートを適用してください
 * アクセスログを監視してください
@@ -262,11 +270,20 @@ sudo bash onion.sh
 
 ---
 
-## 開発支援
+## 📚 参考資料
+
+* Tor プロジェクトドキュメント: https://www.torproject.org/docs/
+* Hidden Service ガイド: https://community.torproject.org/onion-services/
+* Tor セキュリティベストプラクティス: https://support.torproject.org/
+
+---
+
+## 💛 開発支援
 
 このツールが教育目標の達成に役立った場合、継続的な開発への貢献をご検討ください:
 
 **Bitcoin (BTC):**
+
 ```
 bc1q2tf2d7ts89amthax70mf64p9ez7c9xz56snku0
 ```
@@ -275,24 +292,20 @@ bc1q2tf2d7ts89amthax70mf64p9ez7c9xz56snku0
 
 ---
 
-## 教育への取り組み
+## 🌐 教育理念
 
 本プロジェクトは、プライバシー技術におけるアクセス可能な教育への取り組みを維持しています。すべての機能は無料で提供され、ソフトウェアは教育利用のために常に自由に利用可能です。
 
 ---
 
-## 追加リソース
-
-* Torプロジェクトドキュメント: https://www.torproject.org/docs/
-* Hidden Serviceガイド: https://community.torproject.org/onion-services/
-* Torセキュリティベストプラクティス: https://support.torproject.org/
-
----
-
-## 免責事項
+## ⚠️ 免責事項
 
 本ソフトウェアは教育目的でのみ提供されています。ユーザーは、使用が適用される法律、規制、倫理基準に準拠していることを確保する完全な責任を負います。作成者は本ソフトウェアの誤用に対する一切の責任を負いません。
 
 ---
 
+<div align="center">
+
 *プライバシー技術研究のための教育ツール*
+
+</div>

@@ -107,7 +107,7 @@ Tor Browser を使用してアクセス:
 あなたの Hidden Service (.onion)
         |
         v
-    Tor (ポー〈80 -> 127.0.0.1:8080)
+    Tor (ポート80 -> 127.0.0.1:8080)
         |
         v
     Nginx (127.0.0.1:8080)
@@ -275,20 +275,6 @@ sudo bash onion.sh
 * Tor プロジェクトドキュメント: https://www.torproject.org/docs/
 * Hidden Service ガイド: https://community.torproject.org/onion-services/
 * Tor セキュリティベストプラクティス: https://support.torproject.org/
-
----
-
-## 💛 開発支援
-
-このツールが教育目標の達成に役立った場合、継続的な開発への貢献をご検討ください:
-
-**Bitcoin (BTC):**
-
-```
-bc1q2tf2d7ts89amthax70mf64p9ez7c9xz56snku0
-```
-
-すべての寄付は、プライバシーとセキュリティ研究のための無料教育リソースの維持を支援します。
 
 ---
 
